@@ -8,6 +8,9 @@ class Composite(PizzaComponent):
     def add(self, component):
         self.children.append(component)
 
+    def remove(self, component):
+        self.children.remove(component)
+
     def accept(self, visitor):
         visitor.visit_order(self)
         for child in self.children:

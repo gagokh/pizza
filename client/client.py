@@ -174,6 +174,7 @@ def get_order():
         elif choice == "2":
             print("Welke pizza wilt u verwijderen?")
             pizza_name = sanitize_input(input())
+            current_order.remove(pizza_item)
         elif choice == "3":
             print("Van welke pizza wilt u de toppings wijzigen?")
             pizza_name = sanitize_input(input())

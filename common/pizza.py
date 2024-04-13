@@ -4,7 +4,7 @@ class PizzaComponent:
 
 
 class Pizza(PizzaComponent):
-    def __init__(self, name, price, quantity, topping):
+    def __init__(self, name, topping, quantity, price):
         self.name = name
         self.topping = topping
         self.quantity = quantity
@@ -15,12 +15,3 @@ class Pizza(PizzaComponent):
 
     def get_price(self):
         return self.price
-
-
-class Topping(PizzaComponent):
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-
-    def accept(self, visitor):
-        return visitor.visit_topping(self)

@@ -3,7 +3,7 @@ import re
 from common.pattern.composite import Composite
 # from common.pattern.singleton import Singleton
 from common.pattern.visitor import PriceCalculatorVisitor
-from common.pizza import Pizza, Topping
+from common.pizza import Pizza
 
 NAW = []
 pizza_menu = [
@@ -89,13 +89,15 @@ def get_pizza():
             if pizza_name == menu_item['name']:
                 pizza_exists = True
                 pizza = menu_item['name']
+                price = menu_item['price']
 
                 # Vraag naar toppings en hoeveelheid
                 topping = get_toppings(pizza)
                 quantity = get_quantity(pizza, topping)
-                price = '1'
 
-                return Pizza(pizza, topping, price, quantity)
+
+                # def __init__(self, name, topping, quantity, price):
+                return Pizza(pizza, topping, quantity, price)
 
         if not pizza_exists:
             print("Deze pizza hebben we niet.")
@@ -155,8 +157,9 @@ def get_order():
         list: Een lijst met items in de bestelling.
 
     """
-    current_order = []
-    get_NAW()
+    current_order = Composite()
+
+    # get_NAW()
     while True:
         print("Opties:")
         print("1. Voeg pizza toe")
@@ -167,7 +170,7 @@ def get_order():
         choice = sanitize_input(input())
         if choice == "1":
             pizza_item = get_pizza()
-            current_order.append(pizza_item)
+            current_order.add(pizza_item)
         elif choice == "2":
             print("Welke pizza wilt u verwijderen?")
             pizza_name = sanitize_input(input())
@@ -210,34 +213,11 @@ def main():
     # communication_strategies = Singleton()
 
     while True:
-        # Creëer een bestelling
-        order = Composite()
-        pizza1 = Composite()
-
-        # Voeg pizza's en toppings toe aan de bestelling
-        # pizza_margherita = Pizza("Margherita", 9.00)
-        # pizza_pepperoni = Pizza("Pepperoni", 10.00)
-        # topping_extra_cheese = Topping("Extra Cheese", 1.50)
-        # topping_mushrooms = Topping("Mushrooms", 1.00)
-
-        # Stel de bestelling samen met pizza's en toppings
-        # pizza1.add(pizza_margherita)
-        # pizza1.add(topping_extra_cheese)
-
-        order.add(pizza1)
-
-
-        # Maak een prijscalculator Visitor
+        order = get_order()
         price_calculator = PriceCalculatorVisitor()
-
-        # Bereken de totaalprijs van de bestelling met de Visitor
         total_price = price_calculator.visit_order(order)
-
-        # Print de totaalprijs
         print(f"Totaalprijs van de bestelling: €{total_price:.2f}")
 
-        order = get_order()
-        print(order)
         print("Uw bestelling:")
         print("\n".join(NAW))
         # output_order(order, visitor)

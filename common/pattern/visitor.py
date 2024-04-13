@@ -5,15 +5,8 @@ class PriceCalculatorVisitor:
 
     def visit_pizza(self, pizza):
         if pizza not in self.visited_components:  # Controleer of pizza al is bezocht
-            self.total_price += pizza.price
+            self.total_price += (pizza.price * pizza.quantity)
             self.visited_components.add(pizza)
-
-
-    def visit_topping(self, topping):
-        if topping not in self.visited_components:  # Controleer of topping al is bezocht
-            self.total_price += topping.price
-            self.visited_components.add(topping)
-
 
     def visit_order(self, order):
         if order not in self.visited_components:  # Controleer of order al is bezocht

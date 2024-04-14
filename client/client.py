@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 from common.pattern.composite import Composite
 # from common.pattern.singleton import Singleton
@@ -218,6 +219,8 @@ def main():
         order_string = "\n".join(NAW) + "\n"
         print_order = PrintOrderVisitor()
         order_string += print_order.visit_order(order)
+        order_string += f"\nBesteld op: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+
 
         print("Uw bestelling:")
         print(order_string)

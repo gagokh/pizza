@@ -161,12 +161,12 @@ def get_order():
     """
     current_order = Composite()
 
-    # get_NAW()
+    get_NAW()
     while True:
         print("Opties:")
         print("1. Voeg pizza toe")
         print("2. Verwijder pizza")
-        print("3. Wijzig toppings")
+        print("3. Bekijk bestelling")
         print("4. Afronden en bestellen")
 
         choice = sanitize_input(input())
@@ -176,16 +176,18 @@ def get_order():
         elif choice == "2":
             print("Welke pizza wilt u verwijderen?")
             pizza_name = sanitize_input(input())
-            current_order.remove(pizza_item)
+            current_order.find_and_remove_pizza(pizza_name)
         elif choice == "3":
-            print("Van welke pizza wilt u de toppings wijzigen?")
-            pizza_name = sanitize_input(input())
+            print("Dit is je huidige bestelling:")
+            print_order = PrintOrderVisitor()
+            print(print_order.visit_order(current_order))
+
         elif choice == "4":
             return current_order
         else:
             print("Ongeldige invoer. Probeer opnieuw.")
 
-def construct_and_send_order(singleton, order_list, NAW):
+def construct_and_send_order(order_string):
     """
     Construeer en verzend de bestelling.
 
@@ -195,9 +197,7 @@ def construct_and_send_order(singleton, order_list, NAW):
 
     """
     communication_method = 'HTTP'
-    order_string = "\n".join(NAW) + "\n"
-    print_order = PrintOrderVisitor()
-    order_string += print_order.visit_order(order_list)
+
     singleton = Singleton()
 
     # Gebruik de geselecteerde strategie om het bericht naar de server te verzenden
@@ -207,7 +207,6 @@ def construct_and_send_order(singleton, order_list, NAW):
 
 def main():
 
-    # communication_strategies = Singleton()
 
     while True:
         order = get_order()
@@ -215,14 +214,16 @@ def main():
         total_price = price_calculator.visit_order(order)
         print(f"Totaalprijs van de bestelling: €{total_price:.2f}")
 
+        order_string = "\n".join(NAW) + "\n"
+        print_order = PrintOrderVisitor()
+        order_string += print_order.visit_order(order)
+
         print("Uw bestelling:")
-        print("\n".join(NAW))
-        # output_order(order, visitor)
+        print(order_string)
+
         print("Haal uw bestelling af.")
 
-        singleton = ''
-        # Roep construct_and_send_order aan om de bestelling te verzenden
-        construct_and_send_order(singleton, order, NAW)
+        construct_and_send_order(order_string)
 
 
 if __name__ == "__main__":

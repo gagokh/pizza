@@ -1,8 +1,6 @@
 import re
 from datetime import datetime
-
 from common.pattern.composite import Composite
-# from common.pattern.singleton import Singleton
 from common.pattern.calculate_totalprice_visitor import PriceCalculatorVisitor
 from common.pattern.print_order_visitor import PrintOrderVisitor
 from common.pattern.singleton import Singleton
@@ -200,7 +198,7 @@ def construct_and_send_order(order_string):
     Args:
         order_string (string): De volledige bestelling.
     """
-    communication_method = 'HTTP'
+    communication_method = 'UDP'
 
     singleton = Singleton()
 

@@ -9,7 +9,7 @@ def load_secret_key():
     Returns:
         bytes: De geheime sleutel als bytes.
     """
-    with open('../client/secret_key.txt', 'rb') as keyfile:
+    with open('../../client/secret_key.txt', 'rb') as keyfile:
         return keyfile.read()
 
 # Gebruik de geladen sleutel om gegevens te versleutelen/ontsleutelen

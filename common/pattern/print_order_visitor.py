@@ -6,7 +6,7 @@ class PrintOrderVisitor:
     def visit_pizza(self, pizza):
         if pizza not in self.visited_components:  # Controleer of pizza al is bezocht
             formated_toppings = '\n'.join(pizza.topping.split(','))
-            self.order_string += f"{pizza.name}\n{pizza.quantity}x\n{len(pizza.topping.split(','))}x\n{formated_toppings}"
+            self.order_string += f"{pizza.name}\n{pizza.quantity}x\n{len(pizza.topping.split(','))}x\n{formated_toppings} "
 
     def visit_order(self, order):
         if order not in self.visited_components:  # Controleer of order al is bezocht

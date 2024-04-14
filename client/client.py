@@ -18,6 +18,7 @@ pizza_menu = [
 
 TOPPINGS = {"Ham", "Kaas", "Tonijn", "Salami", "Ananas"}
 
+
 def sanitize_input(input_string):
     """
     Sanitize de invoer van de gebruiker door spaties en speciale tekens te verwijderen.
@@ -32,6 +33,7 @@ def sanitize_input(input_string):
     sanitized_string = input_string.strip()
     sanitized_string = re.sub(r'[^a-zA-Z0-9\s,]', '', sanitized_string)
     return sanitized_string
+
 
 def validate_quantity(input_string):
     """
@@ -69,6 +71,7 @@ def get_NAW():
 
     NAW.extend([naam, straat, postcode])
 
+
 def get_pizza():
     """
     Bestel een pizza.
@@ -97,12 +100,12 @@ def get_pizza():
                 topping = get_toppings(pizza)
                 quantity = get_quantity(pizza, topping)
 
-
                 # def __init__(self, name, topping, quantity, price):
                 return Pizza(pizza, topping, quantity, price)
 
         if not pizza_exists:
             print("Deze pizza hebben we niet.")
+
 
 def get_toppings(pizza):
     """
@@ -128,6 +131,7 @@ def get_toppings(pizza):
     # Converteer de set naar een komma-gescheiden string
     topping = ', '.join(selected_toppings)
     return topping
+
 
 def get_quantity(pizza, topping):
     """
@@ -187,14 +191,13 @@ def get_order():
         else:
             print("Ongeldige invoer. Probeer opnieuw.")
 
+
 def construct_and_send_order(order_string):
     """
     Construeer en verzend de bestelling.
 
     Args:
-        order_list (list): Een lijst met items in de bestelling.
-        NAW (list): Een lijst met naam, straat en postcode van de gebruiker.
-
+        order_string (string): De volledige bestelling.
     """
     communication_method = 'HTTP'
 
@@ -206,8 +209,6 @@ def construct_and_send_order(order_string):
 
 
 def main():
-
-
     while True:
         order = get_order()
         price_calculator = PriceCalculatorVisitor()
@@ -220,7 +221,6 @@ def main():
 
         print("Uw bestelling:")
         print(order_string)
-
         print("Haal uw bestelling af.")
 
         construct_and_send_order(order_string)

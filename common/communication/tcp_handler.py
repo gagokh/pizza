@@ -1,8 +1,8 @@
-from communication_strategy import CommunicationStrategy
+
 import socket
 
 
-class TCPHandler(CommunicationStrategy):
+class TCPHandler:
     """
     Klasse voor TCP-communicatie.
 
@@ -16,11 +16,9 @@ class TCPHandler(CommunicationStrategy):
 
     """
 
-
     def __init__(self, host, port):
         self.host = host
         self.port = port
-
 
     def send_message(self, message):
         """

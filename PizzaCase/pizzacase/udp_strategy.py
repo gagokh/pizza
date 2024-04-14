@@ -9,7 +9,7 @@ def load_secret_key():
 
     :return: De geheime sleutel als bytes.
     """
-    with open('secret_key.txt', 'rb') as keyfile:
+    with open('../../secret_key.txt', 'rb') as keyfile:
         return keyfile.read()
 
 

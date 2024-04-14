@@ -2,7 +2,9 @@ import re
 
 from common.pattern.composite import Composite
 # from common.pattern.singleton import Singleton
-from common.pattern.visitor import PriceCalculatorVisitor
+from common.pattern.calculate_totalprice_visitor import PriceCalculatorVisitor
+from common.pattern.print_order_visitor import PrintOrderVisitor
+from common.pattern.singleton import Singleton
 from common.pizza import Pizza
 
 NAW = []
@@ -192,17 +194,11 @@ def construct_and_send_order(singleton, order_list, NAW):
         NAW (list): Een lijst met naam, straat en postcode van de gebruiker.
 
     """
-
-    communication_method = 'http'
+    communication_method = 'HTTP'
     order_string = "\n".join(NAW) + "\n"
-    for order_item in order_list:
-        pizza_name = order_item.pizza
-        quantity = order_item.quantity
-        topping = order_item.topping
-        if topping == "":
-            order_string += f"{quantity} {pizza_name}\n"
-        else:
-            order_string += f"{quantity} {pizza_name} met toppings: {topping}\n"
+    print_order = PrintOrderVisitor()
+    order_string += print_order.visit_order(order_list)
+    singleton = Singleton()
 
     # Gebruik de geselecteerde strategie om het bericht naar de server te verzenden
     selected_strategy = singleton.get_strategy(communication_method)

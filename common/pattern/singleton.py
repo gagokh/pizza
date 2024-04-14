@@ -1,11 +1,6 @@
-from client.communication.tcp_handler import TCPHandler
-from client.communication.udp_handler import UDPHandler
-from client.communication.http_handler import HTTPHandler
-
-
-# import TCPHandler
-# import UDPHandler
-# import HTTPHandler
+from ..communication.tcp_handler import TCPHandler
+from ..communication.udp_handler import UDPHandler
+from ..communication.http_handler import HTTPHandler
 
 class Singleton:
     _instance = None

@@ -2,16 +2,26 @@ import requests
 from cryptography.fernet import Fernet
 
 
+def generate_secret_key():
+    # Genereer een nieuwe geheime sleutel
+    # Bewaar de sleutel veilig (bijvoorbeeld in een configuratiebestand)
+    with open('secret_key.txt', 'wb') as keyfile:
+        keyfile.write(Fernet.generate_key())
+
+
 def load_secret_key():
     """
     Laad de geheime sleutel uit het bestand 'secret_key.txt'.
 
-    Returns:
-        bytes: De geladen geheime sleutel.
+    :return: De geheime sleutel als bytes.
     """
-    with open('secret_key.txt', 'rb') as keyfile:
-        return keyfile.read()
-
+    try:
+        with open('secret_key.txt', 'rb') as keyfile:
+            return keyfile.read()
+    except FileNotFoundError:
+        generate_secret_key()
+        with open('secret_key.txt', 'rb') as keyfile:
+            return keyfile.read()
 
 # Gebruik de geladen sleutel om gegevens te versleutelen/ontsleutelen
 secret_key = load_secret_key()

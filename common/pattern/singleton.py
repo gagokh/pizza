@@ -13,7 +13,7 @@ class Singleton:
 
     def init_strategies(self):
         """
-        Initialiseer communicatiestrategieën.
+        Initialise strategies.
         """
         self.strategies = {
             'TCP': TCPHandler('localhost', 1243),  # Pas de host en poort aan
@@ -23,13 +23,13 @@ class Singleton:
 
     def get_strategy(self, communication_method):
         """
-        Haal de communicatiestrategie op op basis van de opgegeven methode.
+        Get the communication strategy based on the specified method.
 
         Args:
-            communication_method (str): De gewenste communicatiemethode ('TCP', 'UDP' of 'HTTP').
+            communication_method (str): the wanted communication method ('TCP', 'UDP' of 'HTTP').
 
         Returns:
-            CommunicationStrategy: De gekozen communicatiestrategie.
+            CommunicationStrategy: The chosen strategy.
 
         """
         return self.strategies.get(communication_method)

@@ -11,5 +11,6 @@ class Pizza(PizzaComponent):
         self.price = price
 
     def accept(self, visitor):
+        # Visit the pizza
         return visitor.visit_pizza(self)
 

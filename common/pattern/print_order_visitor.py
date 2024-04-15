@@ -1,15 +1,18 @@
 class PrintOrderVisitor:
     def __init__(self):
-        self.visited_components = set()  # Houd bij welke componenten al zijn bezocht
+        self.visited_components = set()
         self.order_string = ""
 
     def visit_pizza(self, pizza):
-        if pizza not in self.visited_components:  # Controleer of pizza al is bezocht
+        # Check if pizza is already visited
+        if pizza not in self.visited_components:
             formated_toppings = '\n'.join(pizza.topping.split(','))
             self.order_string += f"{pizza.name}\n{pizza.quantity}x\n{len(pizza.topping.split(','))}x\n{formated_toppings} "
 
+
     def visit_order(self, order):
-        if order not in self.visited_components:  # Controleer of order al is bezocht
+        # Check if order is already visited
+        if order not in self.visited_components:
             self.visited_components.add(order)
-            order.accept(self)  # Bezoek elk onderdeel van de bestelling
+            order.accept(self)
         return self.order_string

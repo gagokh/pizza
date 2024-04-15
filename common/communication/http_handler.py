@@ -3,18 +3,18 @@ from cryptography.fernet import Fernet
 
 
 def generate_secret_key():
-    # Genereer een nieuwe geheime sleutel
-    # Bewaar de sleutel veilig (bijvoorbeeld in een configuratiebestand)
+    # Generate the secret key and store it in a file
     with open('secret_key.txt', 'wb') as keyfile:
         keyfile.write(Fernet.generate_key())
 
 
 def load_secret_key():
     """
-    Laad de geheime sleutel uit het bestand 'secret_key.txt'.
+    Load the secret key 'secret_key.txt'.
 
-    :return: De geheime sleutel als bytes.
+    :return: Return the secret key as bytes.
     """
+    # Check if the key file exists, otherwise generate a new key
     try:
         with open('secret_key.txt', 'rb') as keyfile:
             return keyfile.read()
@@ -23,7 +23,7 @@ def load_secret_key():
         with open('secret_key.txt', 'rb') as keyfile:
             return keyfile.read()
 
-# Gebruik de geladen sleutel om gegevens te versleutelen/ontsleutelen
+# Use the secret key
 secret_key = load_secret_key()
 
 
